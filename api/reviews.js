@@ -9,11 +9,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    const url = `https://api.judge.me/api/v1/reviews?shop_domain=${SHOP_DOMAIN}&per_page=10${product_id ? `&product_id=${product_id}` : ''}`;
+    const url = `https://api.judge.me/api/v1/reviews?api_token=${API_TOKEN}&shop_domain=${SHOP_DOMAIN}&per_page=10${product_id ? `&product_id=${product_id}` : ''}`;
 
-    const response = await fetch(url, {
-      headers: { Authorization: `Bearer ${API_TOKEN}` },
-    });
+    const response = await fetch(url);
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
     const data = await response.json();
 
